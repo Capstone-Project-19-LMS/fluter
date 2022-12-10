@@ -23,3 +23,35 @@ Future<http.Response> tryRegister(name, email, password) {
     body: json.encode(data),
   );
 }
+
+Future<http.Response> tryVerif(customer_id, code) {
+  Map data = {
+    'customer_id': customer_id,
+    'code': code,
+  };
+  return http.put(
+    Uri.http(url, 'customer/verifikasi'),
+    headers: {
+      HttpHeaders.contentTypeHeader: "application/json",
+      HttpHeaders.acceptHeader: "*/*",
+      HttpHeaders.accessControlAllowOriginHeader: "*",
+    },
+    body: json.encode(data),
+  );
+}
+
+Future<http.Response> tryLogin(email, password) {
+  Map data = {
+    'email': email,
+    'password': password,
+  };
+  return http.post(
+    Uri.http(url, 'customer/login'),
+    headers: {
+      HttpHeaders.contentTypeHeader: "application/json",
+      HttpHeaders.acceptHeader: "*/*",
+      HttpHeaders.accessControlAllowOriginHeader: "*",
+    },
+    body: json.encode(data),
+  );
+}
