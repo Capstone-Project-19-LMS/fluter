@@ -35,7 +35,7 @@ class _RegistScreenState extends State<RegistScreen> {
   // TextEditingController _passwordTextController = TextEditingController();
   // TextEditingController _emailTextController = TextEditingController();
   // TextEditingController _nameTextController = TextEditingController();
-  String response = "";
+  // String response = "";
 
   void showPassword() {
     setState(() {
