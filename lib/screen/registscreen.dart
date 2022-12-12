@@ -205,173 +205,174 @@ class _RegistScreenState extends State<RegistScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Color.fromARGB(255, 251, 220, 13),
-      ),
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: SingleChildScrollView(
           child: Column(children: <Widget>[
-            Padding(
-                padding: EdgeInsets.all(15),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      logoWidget("assets/image/logo.png"),
-                      Container(
-                        alignment: Alignment.topRight,
-                        child: const Text(
-                          'Daftar',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        // controller: _nameTextController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(width: 2.0)),
-                          labelText: 'Nama Lengkap',
-                          hintText: 'Masukan Lengkap',
-                        ),
-                        validator: (nameValue) {
-                          if (nameValue!.isEmpty) {
-                            return 'Silahkan Masukkan Nama Lengkap Anda';
-                          }
-                          name = nameValue;
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        // controller: _emailTextController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(width: 2.0)),
-                          labelText: 'Nama Email',
-                          hintText: 'Masukan Email',
-                        ),
-                        validator: (emailValue) {
-                          if (emailValue!.isEmpty) {
-                            return 'Silahkan Masukkan Email Anda';
-                          }
-                          email = emailValue;
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        // controller: _passwordTextController,
-                        obscureText: !visibilitypass,
-                        decoration: InputDecoration(
-                          border: const OutlineInputBorder(
-                              borderSide: BorderSide(width: 2.0)),
-                          labelText: 'Kata Sandi',
-                          hintText: 'Masukan Kata Sandi',
-                          suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  visibilitypass = !visibilitypass;
-                                });
-                              },
-                              icon: visibilitypass
-                                  ? const Icon(Icons.visibility)
-                                  : const Icon(Icons.visibility_off)),
-                        ),
-                        validator: (passwordValue) {
-                          if (passwordValue!.isEmpty) {
-                            return 'Silahkan Masukkan Nama Lengkap Anda';
-                          }
-                          password = passwordValue;
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      // TextFormField(
-                      //   // controller: _passwordTextController,
-                      //   obscureText: !visibilitypass,
-                      //   decoration: InputDecoration(
-                      //     border: const OutlineInputBorder(
-                      //         borderSide: BorderSide(width: 2.0)),
-                      //     labelText: 'Konfirmasi Kata Sandi',
-                      //     hintText: 'Masukan Kata Sandi',
-                      //     suffixIcon: IconButton(
-                      //         onPressed: () {
-                      //           setState(() {
-                      //             visibilitypass = !visibilitypass;
-                      //           });
-                      //         },
-                      //         icon: visibilitypass
-                      //             ? const Icon(Icons.visibility)
-                      //             : const Icon(Icons.visibility_off)),
-                      //   ),
-                      //   validator: (passwordValue) {
-                      //     if (passwordValue!.isEmpty) {
-                      //       return 'Silahkan Masukkan Nama Lengkap Anda';
-                      //     }
-                      //     password = passwordValue;
-                      //     return null;
-                      //   },
-                      // ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Checkbox(
-                            value: iChecked,
-                            onChanged: (value) {
-                              iChecked = !iChecked;
-                              setState(() {});
-                            },
-                          ),
-                          Expanded(
-                            child: const Text(
-                              "Saya telah membaca dan setuju dengan persyaratan layanan dan polisi privasi kami",
-                              softWrap: true,
-                              maxLines: 2,
-                              style: TextStyle(color: Colors.black),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  logoWidget("assets/image/logo.png"),
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          alignment: Alignment.topRight,
+                          child: const Text(
+                            'Daftar',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
                             ),
                           ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 40,
-                        margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(90)),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              processRegisterRequest(name, email, password);
-                            }
-                          },
-                          child: Text('Daftar'),
                         ),
-                      ),
-                    ],
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          // controller: _nameTextController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(width: 2.0)),
+                            labelText: 'Nama Lengkap',
+                            hintText: 'Masukan Lengkap',
+                          ),
+                          validator: (nameValue) {
+                            if (nameValue!.isEmpty) {
+                              return 'Silahkan Masukkan Nama Lengkap Anda';
+                            }
+                            name = nameValue;
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          // controller: _emailTextController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(width: 2.0)),
+                            labelText: 'Nama Email',
+                            hintText: 'Masukan Email',
+                          ),
+                          validator: (emailValue) {
+                            if (emailValue!.isEmpty) {
+                              return 'Silahkan Masukkan Email Anda';
+                            }
+                            email = emailValue;
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          // controller: _passwordTextController,
+                          obscureText: !visibilitypass,
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(
+                                borderSide: BorderSide(width: 2.0)),
+                            labelText: 'Kata Sandi',
+                            hintText: 'Masukan Kata Sandi',
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    visibilitypass = !visibilitypass;
+                                  });
+                                },
+                                icon: visibilitypass
+                                    ? const Icon(Icons.visibility)
+                                    : const Icon(Icons.visibility_off)),
+                          ),
+                          validator: (passwordValue) {
+                            if (passwordValue!.isEmpty) {
+                              return 'Silahkan Masukkan Nama Lengkap Anda';
+                            }
+                            password = passwordValue;
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        // TextFormField(
+                        //   // controller: _passwordTextController,
+                        //   obscureText: !visibilitypass,
+                        //   decoration: InputDecoration(
+                        //     border: const OutlineInputBorder(
+                        //         borderSide: BorderSide(width: 2.0)),
+                        //     labelText: 'Konfirmasi Kata Sandi',
+                        //     hintText: 'Masukan Kata Sandi',
+                        //     suffixIcon: IconButton(
+                        //         onPressed: () {
+                        //           setState(() {
+                        //             visibilitypass = !visibilitypass;
+                        //           });
+                        //         },
+                        //         icon: visibilitypass
+                        //             ? const Icon(Icons.visibility)
+                        //             : const Icon(Icons.visibility_off)),
+                        //   ),
+                        //   validator: (passwordValue) {
+                        //     if (passwordValue!.isEmpty) {
+                        //       return 'Silahkan Masukkan Nama Lengkap Anda';
+                        //     }
+                        //     password = passwordValue;
+                        //     return null;
+                        //   },
+                        // ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Checkbox(
+                              value: iChecked,
+                              onChanged: (value) {
+                                iChecked = !iChecked;
+                                setState(() {});
+                              },
+                            ),
+                            Expanded(
+                              child: const Text(
+                                "Saya telah membaca dan setuju dengan persyaratan layanan dan polisi privasi kami",
+                                softWrap: true,
+                                maxLines: 2,
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 40,
+                          margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(90)),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                processRegisterRequest(name, email, password);
+                              }
+                            },
+                            child: Text('Daftar'),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                )),
+                ],
+              ),
+            ),
           ]),
         ),
       ),
