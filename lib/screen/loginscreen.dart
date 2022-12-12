@@ -169,123 +169,126 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Form(
               key: _formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: _emailTextController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(width: 2.0)),
-                      labelText: 'Email',
-                      hintText: 'Masukan Email',
-                    ),
-                    validator: (emailValue) {
-                      if (emailValue!.isEmpty) {
-                        return 'Silahkan Masukkan Email Anda';
-                      }
-                      email = emailValue;
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    controller: _passwordTextController,
-                    obscureText: !visibilityPass,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(
-                          borderSide: BorderSide(width: 2.0)),
-                      labelText: 'Password',
-                      hintText: 'Masukan Password',
-                      suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              visibilityPass = !visibilityPass;
-                            });
-                          },
-                          icon: visibilityPass
-                              ? const Icon(Icons.visibility)
-                              : const Icon(Icons.visibility_off)),
-                    ),
-                    validator: (passwordValue) {
-                      if (passwordValue!.isEmpty) {
-                        return 'Silahkan Masukkan Email Anda';
-                      }
-                      password = passwordValue;
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      // const Text(
-                      //   "Simpan Kata Sandi",
-                      //   style: TextStyle(color: Colors.black),
-                      // ),
-                      // Checkbox(
-                      //   value: iChecked,
-                      //   onChanged: (value) {
-                      //     iChecked = !iChecked;
-                      //     setState(() {});
-                      //   },
-                      // ),
-                      // const SizedBox(
-                      //   width: 45,
-                      // ),
-                      TextButton(
-                          onPressed: () {},
-                          child: const Text('Lupa kata sandi?'))
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 40,
-                    margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(90)),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if(_formKey.currentState!.validate()){
-                          processLoginRequest(_emailTextController.text.toString(), _passwordTextController.text.toString());
-                          setState(() {
-                            _isLoading = true;
-                          });
-                        } else{
-                          _showAlertDialog("Pastikan Email atau Password Benar");
-                        }
-                        // Navigator.pushReplacementNamed(context, '/home');
-                      },
-                      child: const Text('Masuk'),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Belum punya akun?",
-                        style: TextStyle(color: Colors.black),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: _emailTextController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(width: 2.0)),
+                        labelText: 'Email',
+                        hintText: 'Masukan Email',
                       ),
-                      TextButton(
+                      validator: (emailValue) {
+                        if (emailValue!.isEmpty) {
+                          return 'Silahkan Masukkan Email Anda';
+                        }
+                        email = emailValue;
+                        return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: _passwordTextController,
+                      obscureText: !visibilityPass,
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(
+                            borderSide: BorderSide(width: 2.0)),
+                        labelText: 'Password',
+                        hintText: 'Masukan Password',
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                visibilityPass = !visibilityPass;
+                              });
+                            },
+                            icon: visibilityPass
+                                ? const Icon(Icons.visibility)
+                                : const Icon(Icons.visibility_off)),
+                      ),
+                      validator: (passwordValue) {
+                        if (passwordValue!.isEmpty) {
+                          return 'Silahkan Masukkan Email Anda';
+                        }
+                        password = passwordValue;
+                        return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        // const Text(
+                        //   "Simpan Kata Sandi",
+                        //   style: TextStyle(color: Colors.black),
+                        // ),
+                        // Checkbox(
+                        //   value: iChecked,
+                        //   onChanged: (value) {
+                        //     iChecked = !iChecked;
+                        //     setState(() {});
+                        //   },
+                        // ),
+                        // const SizedBox(
+                        //   width: 45,
+                        // ),
+                        TextButton(
+                            onPressed: () {},
+                            child: const Text('Lupa kata sandi?'))
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 40,
+                      margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(90)),
+                      child: ElevatedButton(
                         onPressed: () {
-                          // Navigator.pushReplacementNamed(context, '/register');
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const RegistScreen()));
+                          if(_formKey.currentState!.validate()){
+                            processLoginRequest(_emailTextController.text.toString(), _passwordTextController.text.toString());
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else{
+                            _showAlertDialog("Pastikan Email atau Password Benar");
+                          }
+                          // Navigator.pushReplacementNamed(context, '/home');
                         },
-                        child: Text('Daftar'),
-                      )
-                    ],
-                  ),
-                ],
+                        child: const Text('Masuk'),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Belum punya akun?",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // Navigator.pushReplacementNamed(context, '/register');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const RegistScreen()));
+                          },
+                          child: Text('Daftar'),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             )
           ]),
