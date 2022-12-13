@@ -3,9 +3,11 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:kelompok19lmsproject/api/api.dart';
 import 'package:kelompok19lmsproject/screen/loginscreen.dart';
+import 'package:kelompok19lmsproject/screen/registscreen.dart';
 import 'package:kelompok19lmsproject/widgets/logowidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +20,7 @@ class VerifScreen extends StatefulWidget {
 
 class _VerifScreen extends State<VerifScreen> {
   late String code;
-  late String customer_id;
+  late String email;
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   SharedPreferences? prefs;
@@ -87,12 +89,12 @@ class _VerifScreen extends State<VerifScreen> {
     );
   }
 
-  void processVerifikasiRequest(code, customer_id) async {
+  void processVerifikasiRequest(code, email) async {
     setState(() {
       _isLoading = true;
     });
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var apiResponse = await tryVerif(code, customer_id).timeout(
+    var apiResponse = await tryVerif(code, email).timeout(
       const Duration(seconds: 8),
     );
 
@@ -102,9 +104,9 @@ class _VerifScreen extends State<VerifScreen> {
       if (kDebugMode) {
         print(apiResponse.body);
       }
-      if (data['message'] == 'success create user') {
+      if (data['message'] == 'success verifikasi') {
         EasyLoading.showSuccess(
-          'Registrasi Berhasil!',
+          'Verifikasi Berhasil!',
           maskType: EasyLoadingMaskType.custom,
         );
         Timer(const Duration(milliseconds: 1000), () {
@@ -133,15 +135,16 @@ class _VerifScreen extends State<VerifScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Icon(Icons.email, size: 100, color: Colors.deepOrange),
-                      Text(
+                      const Icon(Icons.email,
+                          size: 100, color: Colors.deepOrange),
+                      const Text(
                         'Cek Email Yak!',
                         style: TextStyle(fontSize: 20),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text(
+                      const Text(
                         'Pendaftaran Kamu Berhasil. Silahkan Cek \nemail kamu untuk verifikasi akun ya!',
                         style: TextStyle(fontSize: 15),
                       ),
@@ -170,49 +173,278 @@ class _VerifScreen extends State<VerifScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: const Color(0xfff7f6fb),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const RegistScreen()));
+                  },
+                  child: const Icon(
+                    Icons.arrow_back_ios,
+                    size: 24,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple.shade50,
+                  shape: BoxShape.circle,
+                ),
+                child: Image.asset(
+                  'assets/image/verif.png',
+                ),
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              const Text(
+                'Verifikasi OTP',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Cek email anda untuk  mengetahui kode OTP",
+                softWrap: true,
+                maxLines: 2,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black38,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _textFieldOTP(first: true, last: false),
+                  _textFieldOTP(first: false, last: false),
+                  _textFieldOTP(first: false, last: false),
+                  _textFieldOTP(first: false, last: true),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.black),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.yellow),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24.0),
+                      ),
+                    ),
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.all(14.0),
+                    child: Text(
+                      'Verifikasi',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _textFieldOTP({required bool first, last}) {
     return Container(
-      height: 812,
-      width: double.infinity,
-      padding: const EdgeInsets.all(8),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            logoWidget("assets/image/logo.png"),
-            const Text("Verifikasi"),
-            TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(borderSide: BorderSide(width: 2.0)),
-                labelText: 'Kode Verifikasi',
-                hintText: 'Masukan Kode',
-              ),
-              validator: (codeValue) {
-                if (codeValue!.isEmpty) {
-                  return 'Silahkan Masukkan Kode Verifikasi Anda';
-                }
-                code = codeValue;
-                return null;
-              },
+      height: 70,
+      child: AspectRatio(
+        aspectRatio: 1.0,
+        child: TextField(
+          autofocus: true,
+          onChanged: (value) {
+            if (value.length == 1 && last == false) {
+              FocusScope.of(context).nextFocus();
+            }
+            if (value.length == 0 && first == false) {
+              FocusScope.of(context).previousFocus();
+            }
+          },
+          showCursor: false,
+          readOnly: false,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          keyboardType: TextInputType.number,
+          maxLength: 1,
+          decoration: const InputDecoration(
+            counter: Offstage(),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 2, color: Colors.black12),
             ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 40,
-              margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(90)),
-              child: ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    processVerifikasiRequest(code, customer_id);
-                  }
-                },
-                child: const Text('Verifikasi'),
-              ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 2, color: Colors.yellow),
             ),
-          ],
+          ),
         ),
       ),
     );
   }
 }
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: 812,
+//       width: double.infinity,
+//       padding: const EdgeInsets.all(8),
+//       child: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           crossAxisAlignment: CrossAxisAlignment.center,
+//           children: <Widget>[
+//             logoWidget("assets/image/verif.png"),
+//             const SizedBox(
+//               height: 20,
+//             ),
+//             const Text(
+//               "Verifikasi OTP",
+//               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+//             ),
+//             const SizedBox(
+//               height: 20,
+//             ),
+//             const Text("Cek email anda untuk"),
+//             const Text("mengetahui kode OTP"),
+//             const SizedBox(
+//               height: 50,
+//             ),
+//             _textFieldOTP(first: true, last: false),
+//             _textFieldOTP(first: true, last: false),
+//             // TextFormField(
+//             //   keyboardType: TextInputType.number,
+//             //   style: const TextStyle(
+//             //     fontSize: 18,
+//             //     fontWeight: FontWeight.bold,
+//             //   ),
+//             //   decoration: InputDecoration(
+//             //     enabledBorder: OutlineInputBorder(
+//             //       borderSide: const BorderSide(color: Colors.black12),
+//             //       borderRadius: BorderRadius.circular(10),
+//             //     ),
+//             //     focusedBorder: OutlineInputBorder(
+//             //       borderSide: const BorderSide(color: Colors.black12),
+//             //       borderRadius: BorderRadius.circular(10),
+//             //     ),
+//             //   ),
+//             // onChanged: (value) {
+//             //   if (value.length == 1) {
+//             //     FocusScope.of(context).nextFocus();
+//             //   }
+//             // },
+//             // onSaved: (pin1) {},
+//             // decoration: InputDecoration(hintText: "0"),
+//             // style: Theme.of(context).textTheme.headline6,
+//             // keyboardType: TextInputType.number,
+//             // textAlign: TextAlign.center,
+//             // inputFormatters: [
+//             //   LengthLimitingTextInputFormatter(1),
+//             //   FilteringTextInputFormatter.digitsOnly,
+//             // ],
+//             // ),
+//             const SizedBox(
+//               height: 30,
+//             ),
+//             // TextFormField(
+//             //   decoration: const InputDecoration(
+//             //     border: OutlineInputBorder(borderSide: BorderSide(width: 2.0)),
+//             //     labelText: 'Kode Verifikasi',
+//             //     hintText: 'Masukan Kode',
+//             //   ),
+//             //   validator: (codeValue) {
+//             //     if (codeValue!.isEmpty) {
+//             //       return 'Silahkan Masukkan Kode Verifikasi Anda';
+//             //     }
+//             //     code = codeValue;
+//             //     return null;
+//             //   },
+//             // ),
+//             Container(
+//               width: MediaQuery.of(context).size.width,
+//               height: 40,
+//               margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+//               decoration: BoxDecoration(
+//                   color: Colors.white, borderRadius: BorderRadius.circular(90)),
+//               child: ElevatedButton(
+//                 onPressed: () {
+//                   if (_formKey.currentState!.validate()) {
+//                     processVerifikasiRequest(code, customer_id);
+//                   }
+//                 },
+//                 child: const Text('Verifikasi'),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+
+//   _textFieldOTP({required bool first, last}) {
+//     return Container(
+//         height: 85,
+//         child: AspectRatio(
+//           aspectRatio: 1.0,
+//           child: TextField(
+//             autofocus: true,
+//             onChanged: (value) {
+//               // if (value.length = 1 && last = false) {
+//               //   FocusScope.of(context).nextFocus();
+//               // }
+//               // if(value.length = 1 && first = false){
+//               //   FocusScope.of(context).previousFocus();
+//               // }
+//             },
+//             showCursor: false,
+//             readOnly: false,
+//             textAlign: TextAlign.center,
+//             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+//             keyboardType: TextInputType.number,
+//             maxLines: 1,
+//             decoration: InputDecoration(
+//               counter: Offstage(),
+//               enabledBorder: OutlineInputBorder(
+//                 borderSide: BorderSide(width: 2, color: Colors.black12),
+//                 borderRadius: BorderRadius.circular(12),
+//               ),
+//               focusedBorder: OutlineInputBorder(
+//                 borderSide: BorderSide(width: 2, color: Colors.yellow),
+//                 borderRadius: BorderRadius.circular(12),
+//               ),
+//             ),
+//           ),
+//         ));
+//   }
+// }

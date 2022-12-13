@@ -24,12 +24,12 @@ Future<http.Response> tryRegister(name, email, password) {
   );
 }
 
-Future<http.Response> tryVerif(customer_id, code) {
+Future<http.Response> tryVerif(email, code) {
   Map data = {
-    'customer_id': customer_id,
+    'email': email,
     'code': code,
   };
-  return http.put(
+  return http.post(
     Uri.http(url, 'customer/verifikasi'),
     headers: {
       HttpHeaders.contentTypeHeader: "application/json",

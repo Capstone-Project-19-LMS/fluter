@@ -5,6 +5,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:kelompok19lmsproject/screen/loginscreen.dart';
+import 'package:kelompok19lmsproject/screen/verif_screen.dart';
 import 'package:kelompok19lmsproject/widgets/logowidget.dart';
 // import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -145,7 +146,7 @@ class _RegistScreenState extends State<RegistScreen> {
           Navigator.push(
             context,
             PageRouteBuilder(
-              pageBuilder: (c, a1, a2) => const LoginScreen(),
+              pageBuilder: (c, a1, a2) => const VerifScreen(),
               transitionsBuilder: (c, anim, a2, child) =>
                   FadeTransition(opacity: anim, child: child),
               transitionDuration: const Duration(milliseconds: 400),
