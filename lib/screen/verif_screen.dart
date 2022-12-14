@@ -19,11 +19,13 @@ class VerifScreen extends StatefulWidget {
 }
 
 class _VerifScreen extends State<VerifScreen> {
-  late String code;
-  late String email;
+  late String code, email;
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   SharedPreferences? prefs;
+
+  TextEditingController _codeTextController = TextEditingController();
+  TextEditingController _emailTextController = TextEditingController();
 
   void _showAlertDialog(String message) async {
     showDialog(
@@ -104,12 +106,13 @@ class _VerifScreen extends State<VerifScreen> {
       if (kDebugMode) {
         print(apiResponse.body);
       }
-      if (data['message'] == 'success verifikasi') {
-        EasyLoading.showSuccess(
-          'Verifikasi Berhasil!',
-          maskType: EasyLoadingMaskType.custom,
-        );
-        Timer(const Duration(milliseconds: 1000), () {
+      EasyLoading.showSuccess(
+        'Verifikasi Berhasil!',
+        maskType: EasyLoadingMaskType.custom,
+      );
+      Timer(
+        const Duration(milliseconds: 1000),
+        () {
           Navigator.push(
             context,
             PageRouteBuilder(
@@ -120,49 +123,53 @@ class _VerifScreen extends State<VerifScreen> {
             ),
           );
           showModalBottomSheet(
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(25.0),
-                ),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(25.0),
               ),
-              context: context,
-              builder: (context) {
-                return Container(
-                  height: MediaQuery.of(context).copyWith().size.height * 0.35,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15.0, horizontal: 8),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      const Icon(Icons.email,
-                          size: 100, color: Colors.deepOrange),
-                      const Text(
-                        'Cek Email Yak!',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Text(
-                        'Pendaftaran Kamu Berhasil. Silahkan Cek \nemail kamu untuk verifikasi akun ya!',
-                        style: TextStyle(fontSize: 15),
-                      ),
-                    ],
-                  ),
-                );
-              });
-          Timer(const Duration(seconds: 3), () {
-            Navigator.pop(context);
-          });
+            ),
+            context: context,
+            builder: (context) {
+              return Container(
+                height: MediaQuery.of(context).copyWith().size.height * 0.35,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15.0, horizontal: 8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    const Icon(Icons.email,
+                        size: 100, color: Colors.deepOrange),
+                    const Text(
+                      'Cek Email Yak!',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      'Pendaftaran Kamu Berhasil. Silahkan Cek \nemail kamu untuk verifikasi akun ya!',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+          Timer(
+            const Duration(seconds: 3),
+            () {
+              Navigator.pop(context);
+            },
+          );
 
-          setState(() {
-            _isLoading = false;
-          });
-        });
-      } else {
-        _showAlertDialog(data['message']);
-      }
+          setState(
+            () {
+              _isLoading = false;
+            },
+          );
+        },
+      );
     } else if (apiResponse.statusCode == 401) {
       _showAlertDialog("Form Anda Isi Salah ");
     } else {
@@ -236,14 +243,50 @@ class _VerifScreen extends State<VerifScreen> {
               SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _textFieldOTP(first: true, last: false),
-                  _textFieldOTP(first: false, last: false),
-                  _textFieldOTP(first: false, last: false),
-                  _textFieldOTP(first: false, last: true),
-                ],
+              Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: _emailTextController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(width: 2.0)),
+                          labelText: 'Email',
+                          hintText: 'Masukan Email',
+                        ),
+                        validator: (emailValue) {
+                          if (emailValue!.isEmpty) {
+                            return 'Silahkan Masukkan Email Anda';
+                          }
+                          email = emailValue;
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: _codeTextController,
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(
+                              borderSide: BorderSide(width: 2.0)),
+                          labelText: 'Password',
+                          hintText: 'Masukan Password',
+                        ),
+                        validator: (codeValue) {
+                          if (codeValue!.isEmpty) {
+                            return 'Silahkan Masukkan Email Anda';
+                          }
+                          code = codeValue;
+                          return null;
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 20,
@@ -251,7 +294,17 @@ class _VerifScreen extends State<VerifScreen> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      processVerifikasiRequest(_emailTextController.text.toString(),
+                          _codeTextController.text.toString());
+                      setState(() {
+                        _isLoading = true;
+                      });
+                    } else {
+                      _showAlertDialog("Pastikan Email atau Password Benar");
+                    }
+                  },
                   style: ButtonStyle(
                     foregroundColor:
                         MaterialStateProperty.all<Color>(Colors.black),
@@ -279,40 +332,40 @@ class _VerifScreen extends State<VerifScreen> {
     );
   }
 
-  Widget _textFieldOTP({required bool first, last}) {
-    return Container(
-      height: 70,
-      child: AspectRatio(
-        aspectRatio: 1.0,
-        child: TextField(
-          autofocus: true,
-          onChanged: (value) {
-            if (value.length == 1 && last == false) {
-              FocusScope.of(context).nextFocus();
-            }
-            if (value.length == 0 && first == false) {
-              FocusScope.of(context).previousFocus();
-            }
-          },
-          showCursor: false,
-          readOnly: false,
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          keyboardType: TextInputType.number,
-          maxLength: 1,
-          decoration: const InputDecoration(
-            counter: Offstage(),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 2, color: Colors.black12),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 2, color: Colors.yellow),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget _textFieldOTP({required bool first, last}) {
+  //   return Container(
+  //     height: 70,
+  //     child: AspectRatio(
+  //       aspectRatio: 1.0,
+  //       child: TextField(
+  //         autofocus: true,
+  //         onChanged: (value) {
+  //           if (value.length == 1 && last == false) {
+  //             FocusScope.of(context).nextFocus();
+  //           }
+  //           if (value.length == 0 && first == false) {
+  //             FocusScope.of(context).previousFocus();
+  //           }
+  //         },
+  //         showCursor: false,
+  //         readOnly: false,
+  //         textAlign: TextAlign.center,
+  //         style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+  //         keyboardType: TextInputType.number,
+  //         maxLength: 1,
+  //         decoration: const InputDecoration(
+  //           counter: Offstage(),
+  //           enabledBorder: OutlineInputBorder(
+  //             borderSide: BorderSide(width: 2, color: Colors.black12),
+  //           ),
+  //           focusedBorder: OutlineInputBorder(
+  //             borderSide: BorderSide(width: 2, color: Colors.yellow),
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }
 //   @override
 //   Widget build(BuildContext context) {
