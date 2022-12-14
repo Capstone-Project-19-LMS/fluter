@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         debugShowCheckedModeBanner: true,
-        home: introduction == 0 ? SplashScreen() : VerifScreen(),
+        home: introduction == 0 ? SplashScreen() : HomeScreen(),
         routes: {
           '/login': (context) => LoginScreen(),
           '/register': (context) => RegistScreen(),
