@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:kelompok19lmsproject/screen/homescreen.dart';
+import 'package:kelompok19lmsproject/screen/index.dart';
 import 'package:kelompok19lmsproject/screen/loginscreen.dart';
-import 'package:kelompok19lmsproject/screen/profilescreen.dart';
 import 'package:kelompok19lmsproject/screen/registscreen.dart';
 import 'package:kelompok19lmsproject/screen/splashscreen.dart';
 import 'package:kelompok19lmsproject/screen/verif_screen.dart';
@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/login': (context) => LoginScreen(),
           '/register': (context) => RegistScreen(),
-          '/home': (context) => HomeScreen()
+          '/index': (context) => Index()
         });
   }
 }

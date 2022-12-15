@@ -55,3 +55,14 @@ Future<http.Response> tryLogin(email, password) {
     body: json.encode(data),
   );
 }
+
+Future<http.Response> tryLogout(token) {
+  return http.post(
+    Uri.http(url, 'customer/logout'),
+    headers: {
+      HttpHeaders.contentTypeHeader: "application/json",
+      HttpHeaders.acceptHeader: "*/*",
+      HttpHeaders.authorizationHeader: "Bearer $token"
+    },
+  );
+}
