@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kelompok19lmsproject/screen/favorite_screen.dart';
-import 'package:kelompok19lmsproject/screen/mycourse_screen.dart';
-import 'package:kelompok19lmsproject/screen/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,7 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontWeight: FontWeight.w700, fontSize: 24, color: Colors.black),
           ),
         ),
-        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(

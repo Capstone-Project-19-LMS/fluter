@@ -16,29 +16,33 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),
   );
-  WidgetsFlutterBinding.ensureInitialized();
-  final prefs = await SharedPreferences.getInstance();
-  final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
-  // await initIntroduction();
-  runApp(MyApp(isLoggedIn: isLoggedIn));
+  // WidgetsFlutterBinding.ensureInitialized();
+  // final prefs = await SharedPreferences.getInstance();
+  // final isLoggedIn = prefs.getBool('isLoggedIn') ?? true;
+  await initIntroduction();
+  runApp(const MyApp(
+    // isLoggedIn: isLoggedIn
+    ));
 }
 
-// // Future initIntroduction() async {
-// //   WidgetsFlutterBinding.ensureInitialized();
-//   final prefs = await SharedPreferences.getInstance();
-  // final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+Future initIntroduction() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+// final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
 
-//   int? intro = prefs.getInt('introduction');
-//   print('intro : $intro');
-//   if (intro != null && intro == 1) {
-//     return introduction = 1;
-//   }
-//   prefs.setInt('introduction', 1);
-// }
+  int? intro = prefs.getInt('introduction');
+  print('intro : $intro');
+  if (intro != null && intro == 1) {
+    return introduction = 1;
+  }
+  prefs.setInt('introduction', 1);
+}
 
 class MyApp extends StatelessWidget {
-  final bool isLoggedIn;
-  const MyApp({Key? key, required this.isLoggedIn}) : super(key:key);
+  // final bool isLoggedIn;
+  const MyApp({Key? key, 
+  // required this.isLoggedIn
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,19 +68,16 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: true,
 
-        // home: introduction == 0 ? SplashScreen() : LoginScreen(),
-        home: isLoggedIn ? const Index() : const LoginScreen(),
-        // initialRoute: '/splash',
-
         home: introduction == 0 ? SplashScreen() : LoginScreen(),
+        // home: isLoggedIn == true ? SplashScreen() : const LoginScreen(),
+        // initialRoute: '/splash',
 
         routes: {
           '/splash': (context) => SplashScreen(),
-          '/onboarding': (context) => OnboardingScreen(), 
+          '/onboarding': (context) => OnboardingScreen(),
           '/login': (context) => LoginScreen(),
           '/register': (context) => RegistScreen(),
-          '/home': (context) => Index()
-          '/index': (context) => Index()
+          '/index': (context) => Index(),
         });
   }
 }
