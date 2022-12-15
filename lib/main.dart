@@ -63,15 +63,20 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         debugShowCheckedModeBanner: true,
+
         // home: introduction == 0 ? SplashScreen() : LoginScreen(),
         home: isLoggedIn ? const Index() : const LoginScreen(),
         // initialRoute: '/splash',
+
+        home: introduction == 0 ? SplashScreen() : LoginScreen(),
+
         routes: {
           '/splash': (context) => SplashScreen(),
           '/onboarding': (context) => OnboardingScreen(), 
           '/login': (context) => LoginScreen(),
           '/register': (context) => RegistScreen(),
           '/home': (context) => Index()
+          '/index': (context) => Index()
         });
   }
 }

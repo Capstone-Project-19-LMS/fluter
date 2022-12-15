@@ -300,32 +300,6 @@ class _RegistScreenState extends State<RegistScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        // TextFormField(
-                        //   // controller: _passwordTextController,
-                        //   obscureText: !visibilitypass,
-                        //   decoration: InputDecoration(
-                        //     border: const OutlineInputBorder(
-                        //         borderSide: BorderSide(width: 2.0)),
-                        //     labelText: 'Konfirmasi Kata Sandi',
-                        //     hintText: 'Masukan Kata Sandi',
-                        //     suffixIcon: IconButton(
-                        //         onPressed: () {
-                        //           setState(() {
-                        //             visibilitypass = !visibilitypass;
-                        //           });
-                        //         },
-                        //         icon: visibilitypass
-                        //             ? const Icon(Icons.visibility)
-                        //             : const Icon(Icons.visibility_off)),
-                        //   ),
-                        //   validator: (passwordValue) {
-                        //     if (passwordValue!.isEmpty) {
-                        //       return 'Silahkan Masukkan Nama Lengkap Anda';
-                        //     }
-                        //     password = passwordValue;
-                        //     return null;
-                        //   },
-                        // ),
                         const SizedBox(
                           height: 20,
                         ),

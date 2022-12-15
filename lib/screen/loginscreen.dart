@@ -255,16 +255,24 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(90)),
                       child: ElevatedButton(
+
                         onPressed: () async{
                           final prefs = await SharedPreferences.getInstance();
                           prefs.setBool('isLoggedIn',true);
                           if(_formKey.currentState!.validate()){
                             processLoginRequest(_emailTextController.text.toString(), _passwordTextController.text.toString());
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            processLoginRequest(
+                                _emailTextController.text.toString(),
+                                _passwordTextController.text.toString());
+
                             setState(() {
                               _isLoading = true;
                             });
-                          } else{
-                            _showAlertDialog("Pastikan Email atau Password Benar");
+                          } else {
+                            _showAlertDialog(
+                                "Pastikan Email atau Password Benar");
                           }
                           // Navigator.pushReplacementNamed(context, '/home');
                         },
@@ -284,7 +292,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const RegistScreen()));
+                                    builder: (context) =>
+                                        const RegistScreen()));
                           },
                           child: Text('Daftar'),
                         )
