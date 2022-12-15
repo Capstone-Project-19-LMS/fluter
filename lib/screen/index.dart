@@ -15,10 +15,10 @@ class _Index extends State<Index> {
   int _selectedIndex = 0;
 
   final List<Widget> _children = [
-    HomeScreen(),
-    MyCourse(),
-    Favorite(),
-    Profile(),
+    const HomeScreen(),
+    const MyCourse(),
+    const Favorite(),
+    const Profile(),
   ];
 
   void _onItemTapped(int index) {

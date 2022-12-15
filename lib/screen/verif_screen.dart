@@ -257,13 +257,13 @@ class _VerifScreen extends State<VerifScreen> {
                           labelText: 'Email',
                           hintText: 'Masukan Email',
                         ),
-                        validator: (emailValue) {
-                          if (emailValue!.isEmpty) {
-                            return 'Silahkan Masukkan Email Anda';
-                          }
-                          email = emailValue;
-                          return null;
-                        },
+                          // validator: (emailValue) {
+                          //   if (emailValue!.isEmpty) {
+                          //     return 'Silahkan Masukkan Email Anda';
+                          //   }
+                          //   email = emailValue;
+                          //   return null;
+                          // },
                       ),
                       const SizedBox(
                         height: 20,
@@ -273,16 +273,16 @@ class _VerifScreen extends State<VerifScreen> {
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(
                               borderSide: BorderSide(width: 2.0)),
-                          labelText: 'Password',
-                          hintText: 'Masukan Password',
+                          labelText: 'Kode Verifikasi',
+                          hintText: 'Masukan Kode',
                         ),
-                        validator: (codeValue) {
-                          if (codeValue!.isEmpty) {
-                            return 'Silahkan Masukkan Email Anda';
-                          }
-                          code = codeValue;
-                          return null;
-                        },
+                        // validator: (codeValue) {
+                        //   if (codeValue!.isEmpty) {
+                        //     return 'Silahkan Masukkan Kode Anda';
+                        //   }
+                        //   code = codeValue;
+                        //   return null;
+                        // },
                       ),
                     ],
                   ),
@@ -302,7 +302,7 @@ class _VerifScreen extends State<VerifScreen> {
                         _isLoading = true;
                       });
                     } else {
-                      _showAlertDialog("Pastikan Email atau Password Benar");
+                      _showAlertDialog("Pastikan Email atau Kode Benar");
                     }
                   },
                   style: ButtonStyle(

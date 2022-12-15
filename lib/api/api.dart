@@ -1,9 +1,6 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
-import 'package:http_parser/http_parser.dart';
-import 'package:http/http.dart';
 
 const url = '13.213.47.36';
 
