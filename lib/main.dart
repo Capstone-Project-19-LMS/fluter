@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:kelompok19lmsproject/screen/homescreen.dart';
+import 'package:kelompok19lmsproject/screen/index.dart';
 import 'package:kelompok19lmsproject/screen/loginscreen.dart';
 import 'package:kelompok19lmsproject/screen/registscreen.dart';
 import 'package:kelompok19lmsproject/screen/splashscreen.dart';
@@ -56,7 +57,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         debugShowCheckedModeBanner: true,
-        home: introduction == 0 ? SplashScreen() : HomeScreen(),
+        home: introduction == 0 ? SplashScreen() : Index(),
         routes: {
           '/login': (context) => LoginScreen(),
           '/register': (context) => RegistScreen(),

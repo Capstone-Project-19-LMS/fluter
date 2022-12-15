@@ -1,6 +1,10 @@
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kelompok19lmsproject/screen/favorite_screen.dart';
+import 'package:kelompok19lmsproject/screen/mycourse_screen.dart';
+import 'package:kelompok19lmsproject/screen/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,34 +14,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Beranda',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Kursusku',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: Favorit',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 3: Profil',
-      style: optionStyle,
-    ),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,30 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontWeight: FontWeight.w700, fontSize: 24, color: Colors.black),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list_alt_outlined),
-            label: 'Kursusku',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorit',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.yellow[700],
-        unselectedItemColor: Colors.black,
-        onTap: _onItemTapped,
       ),
       body: SingleChildScrollView(
         child: Column(
