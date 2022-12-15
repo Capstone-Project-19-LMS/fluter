@@ -48,10 +48,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
         ],
         onDone: () {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (builder) {
-            return LoginScreen();
-          }));
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (builder) {
+                return LoginScreen();
+              },
+            ),
+          );
         },
         showSkipButton: false,
         showNextButton: true,

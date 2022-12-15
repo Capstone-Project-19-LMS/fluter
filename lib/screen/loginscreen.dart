@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:kelompok19lmsproject/api/api.dart';
 import 'package:kelompok19lmsproject/screen/homescreen.dart';
+import 'package:kelompok19lmsproject/screen/index.dart';
 import 'package:kelompok19lmsproject/screen/registscreen.dart';
 import 'package:kelompok19lmsproject/widgets/logowidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -117,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Navigator.push(
             context,
             PageRouteBuilder(
-              pageBuilder: (c, a1, a2) => const HomeScreen(),
+              pageBuilder: (c, a1, a2) => const Index(),
               transitionsBuilder: (c, anim, a2, child) =>
                   FadeTransition(opacity: anim, child: child),
               transitionDuration: const Duration(milliseconds: 400),
@@ -254,7 +255,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(90)),
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async{
+                          final prefs = await SharedPreferences.getInstance();
+                          prefs.setBool('isLoggedIn',true);
                           if(_formKey.currentState!.validate()){
                             processLoginRequest(_emailTextController.text.toString(), _passwordTextController.text.toString());
                             setState(() {

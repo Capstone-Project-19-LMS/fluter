@@ -4,6 +4,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:kelompok19lmsproject/screen/homescreen.dart';
 import 'package:kelompok19lmsproject/screen/index.dart';
 import 'package:kelompok19lmsproject/screen/loginscreen.dart';
+import 'package:kelompok19lmsproject/screen/onboardingscreen.dart';
 import 'package:kelompok19lmsproject/screen/registscreen.dart';
 import 'package:kelompok19lmsproject/screen/splashscreen.dart';
 import 'package:kelompok19lmsproject/screen/verif_screen.dart';
@@ -15,24 +16,29 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),
   );
-  await initIntroduction();
-  runApp(const MyApp());
-}
-
-Future initIntroduction() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
-
-  int? intro = prefs.getInt('introduction');
-  print('intro : $intro');
-  if (intro != null && intro == 1) {
-    return introduction = 1;
-  }
-  prefs.setInt('introduction', 1);
+  final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+  // await initIntroduction();
+  runApp(MyApp(isLoggedIn: isLoggedIn));
 }
 
+// // Future initIntroduction() async {
+// //   WidgetsFlutterBinding.ensureInitialized();
+//   final prefs = await SharedPreferences.getInstance();
+  // final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+
+//   int? intro = prefs.getInt('introduction');
+//   print('intro : $intro');
+//   if (intro != null && intro == 1) {
+//     return introduction = 1;
+//   }
+//   prefs.setInt('introduction', 1);
+// }
+
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isLoggedIn;
+  const MyApp({Key? key, required this.isLoggedIn}) : super(key:key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,11 +63,15 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         debugShowCheckedModeBanner: true,
-        home: introduction == 0 ? SplashScreen() : Index(),
+        // home: introduction == 0 ? SplashScreen() : LoginScreen(),
+        home: isLoggedIn ? const Index() : const LoginScreen(),
+        // initialRoute: '/splash',
         routes: {
+          '/splash': (context) => SplashScreen(),
+          '/onboarding': (context) => OnboardingScreen(), 
           '/login': (context) => LoginScreen(),
           '/register': (context) => RegistScreen(),
-          '/home': (context) => HomeScreen()
+          '/home': (context) => Index()
         });
   }
 }
