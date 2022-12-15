@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:kelompok19lmsproject/api/api.dart';
 import 'package:kelompok19lmsproject/screen/homescreen.dart';
+import 'package:kelompok19lmsproject/screen/index.dart';
 import 'package:kelompok19lmsproject/screen/registscreen.dart';
 import 'package:kelompok19lmsproject/widgets/logowidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -117,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Navigator.push(
             context,
             PageRouteBuilder(
-              pageBuilder: (c, a1, a2) => const HomeScreen(),
+              pageBuilder: (c, a1, a2) => const Index(),
               transitionsBuilder: (c, anim, a2, child) =>
                   FadeTransition(opacity: anim, child: child),
               transitionDuration: const Duration(milliseconds: 400),
@@ -255,13 +256,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(90)),
                       child: ElevatedButton(
                         onPressed: () {
-                          if(_formKey.currentState!.validate()){
-                            processLoginRequest(_emailTextController.text.toString(), _passwordTextController.text.toString());
+                          if (_formKey.currentState!.validate()) {
+                            processLoginRequest(
+                                _emailTextController.text.toString(),
+                                _passwordTextController.text.toString());
                             setState(() {
                               _isLoading = true;
                             });
-                          } else{
-                            _showAlertDialog("Pastikan Email atau Password Benar");
+                          } else {
+                            _showAlertDialog(
+                                "Pastikan Email atau Password Benar");
                           }
                           // Navigator.pushReplacementNamed(context, '/home');
                         },
@@ -281,7 +285,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const RegistScreen()));
+                                    builder: (context) =>
+                                        const RegistScreen()));
                           },
                           child: Text('Daftar'),
                         )

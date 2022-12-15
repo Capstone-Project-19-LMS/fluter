@@ -57,11 +57,11 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         debugShowCheckedModeBanner: true,
-        home: introduction == 0 ? SplashScreen() : Index(),
+        home: introduction == 0 ? SplashScreen() : LoginScreen(),
         routes: {
           '/login': (context) => LoginScreen(),
           '/register': (context) => RegistScreen(),
-          '/home': (context) => HomeScreen()
+          '/index': (context) => Index()
         });
   }
 }
