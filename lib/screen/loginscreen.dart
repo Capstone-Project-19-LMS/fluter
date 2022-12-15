@@ -255,11 +255,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(90)),
                       child: ElevatedButton(
+
+                        onPressed: () async{
+                          final prefs = await SharedPreferences.getInstance();
+                          prefs.setBool('isLoggedIn',true);
+                          if(_formKey.currentState!.validate()){
+                            processLoginRequest(_emailTextController.text.toString(), _passwordTextController.text.toString());
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             processLoginRequest(
                                 _emailTextController.text.toString(),
                                 _passwordTextController.text.toString());
+
                             setState(() {
                               _isLoading = true;
                             });

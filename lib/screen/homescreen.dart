@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontWeight: FontWeight.w700, fontSize: 24, color: Colors.black),
           ),
         ),
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(
