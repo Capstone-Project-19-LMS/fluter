@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kelompok19lmsproject/screen/profilescreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
