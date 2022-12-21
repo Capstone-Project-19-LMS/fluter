@@ -17,7 +17,7 @@ class _Index extends State<Index> {
   final List<Widget> _children = [
     const HomeScreen(),
     const MyCourse(),
-    const Favorite(),
+    // const Favorite(),
     const Profile(),
   ];
 
@@ -33,15 +33,15 @@ class _Index extends State<Index> {
       bottomNavigationBar: Theme(
         data: ThemeData(canvasColor: Colors.yellow),
         child: BottomNavigationBar(
-          unselectedItemColor: Colors.black,
-          backgroundColor: Colors.black,
+          unselectedItemColor: Colors.black38,
+          backgroundColor: Colors.yellow,
           selectedItemColor: Colors.black,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.list_alt_outlined), label: 'My Course'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.favorite), label: 'Favorite'),
+            // BottomNavigationBarItem(
+            //     icon: Icon(Icons.favorite), label: 'Favorite'),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           ],
           currentIndex: _selectedIndex,
