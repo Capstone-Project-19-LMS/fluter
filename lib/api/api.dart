@@ -73,3 +73,14 @@ Future<https.Response> getAllData(token) async {
     },
   );
 }
+
+Future<https.Response> getCourseHistory(token) {
+  return https.get(
+    Uri.https(url, 'customer/course/history'),
+    headers: {
+      HttpHeaders.contentTypeHeader: "application/json",
+      HttpHeaders.acceptHeader: "*/*",
+      HttpHeaders.authorizationHeader: "Bearer $token"
+    },
+  );
+}
