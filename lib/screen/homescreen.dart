@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kelompok19lmsproject/api/api.dart';
+import 'package:kelompok19lmsproject/screen/course_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -48,85 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      // body:
-      // ListView.separated(
-      //   scrollDirection: Axis.horizontal,
-      //   itemCount: courseData.length,
-      //   itemBuilder: (context, index) => Container(
-      //     width: 150,
-      //     height: 50,
-      //     decoration: BoxDecoration(
-      //       color: Colors.white,
-      //       borderRadius: BorderRadius.circular(10),
-      //       boxShadow: const [
-      //         BoxShadow(
-      //           color: Colors.black,
-      //           blurRadius: 3,
-      //           offset: Offset(0, 0), // changes position of shadow
-      //         ),
-      //       ],
-      //     ),
-      //     child: Column(
-      //       children: [
-      //         SizedBox(
-      //             width: double.infinity,
-      //             height: 115,
-      //             child: Padding(
-      //               padding: const EdgeInsets.symmetric(
-      //                   horizontal: 35, vertical: 20),
-      //               child: Image.network(
-      //                   "https://images.unsplash.com/photo-1628277613967-6abca504d0ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"),
-      //             )),
-      //         Padding(
-      //           padding: const EdgeInsets.only(bottom: 5, left: 8, right: 8),
-      //           child: Text(
-      //             courseData[index]['name'] ?? "No Name",
-      //           ),
-      //         ),
-      //         Text(courseData[index]['description'] ?? "No Description"),
-      //       ],
-      //     ),
-      //   ),
-      //   separatorBuilder: (context, index) => const SizedBox(
-      //     width: 16,
-      //   ),
-      // ),
-      // {
-      // return Padding(
-      //   padding: const EdgeInsets.all(10),
-      //   child: InkWell(
-      //     onTap: () {},
-      //     child: ListTile(
-      //       leading:
-      // CachedNetworkImage(
-      //   imageUrl:
-      //       "https://images.unsplash.com/photo-1628277613967-6abca504d0ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-      //   progressIndicatorBuilder: (context, url, downloadProgress) =>
-      //       CircularProgressIndicator(
-      //           value: downloadProgress.progress),
-      //   errorWidget: (context, url, error) => Icon(Icons.error),
-      // ),
-      //           Image.network(
-      //         // courseData[index]['thumbnail'] ??
-      //         "https://images.unsplash.com/photo-1628277613967-6abca504d0ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-      //         fit: BoxFit.cover,
-      //         // width: 100,
-      //       ),
-      //       title: Text(
-      //         courseData[index]['name'] ?? "No Name",
-      //         maxLines: 1,
-      //         overflow: TextOverflow.ellipsis,
-      //       ),
-      //       subtitle: Text(
-      //         courseData[index]['description'] ?? "No Description",
-      //         maxLines: 2,
-      //         overflow: TextOverflow.ellipsis,
-      //       ),
-      //     ),
-      //   ),
-      // );
-      // },
-
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -186,13 +108,21 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.black),
                       ),
                     ),
-                    Text(
-                      "Lihat Semua",
-                      style: GoogleFonts.workSans(
-                        textStyle: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12,
-                            color: Colors.black),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const CourseScreen()));
+                      },
+                      child: Text(
+                        "Lihat Semua",
+                        style: GoogleFonts.workSans(
+                          textStyle: const TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12,
+                              color: Colors.black),
+                        ),
                       ),
                     ),
                   ],
@@ -210,7 +140,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
-                      // color: Colors.green,
                       elevation: 16,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -225,16 +154,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                 borderRadius: BorderRadius.only(
                                     bottomRight: Radius.circular(10),
                                     topRight: Radius.circular(10))),
-                            // margin: EdgeInsets.only(left: 10),
                             padding: EdgeInsets.all(10),
                             child: Column(
-                              // crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(
                                   width: double.infinity,
                                   height: 125,
                                   child: Image.network(
-                                      "https://images.unsplash.com/photo-1628277613967-6abca504d0ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"),
+                                      "https://tech.pelmorex.com/wp-content/uploads/2020/10/flutter.png"),
                                 ),
                                 const SizedBox(
                                   height: 5,
@@ -285,139 +212,36 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  // Container(
-                  //   width: 100,
-                  //   height: 50,
-                  //   decoration: BoxDecoration(
-                  //     color: Colors.white,
-                  //     borderRadius: BorderRadius.circular(10),
-                  //     boxShadow: const [
-                  //       BoxShadow(
-                  //         color: Colors.black,
-                  //         blurRadius: 3,
-                  //         offset: Offset(0, 0), // changes position of shadow
-                  //       ),
-                  //     ],
-                  //   ),
-                  //   child: Column(
-                  //     children: [
-                  // SizedBox(
-                  //     width: double.infinity,
-                  //     height: 115,
-                  //     child: Padding(
-                  //       padding: const EdgeInsets.symmetric(
-                  //           horizontal: 35, vertical: 20),
-                  //       child: Image.network(
-                  //           "https://images.unsplash.com/photo-1628277613967-6abca504d0ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"),
-                  //     )),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(
-                  //       bottom: 5, left: 8, right: 8),
-                  //   child: Text(
-                  //     courseData[index]['name'] ?? "No Name",
-                  //   ),
-                  // ),
-                  // Text(courseData[index]['description'] ??
-                  //     "No Description"),
-                  //     ],
-                  //   ),
-                  // ),
                 ),
               ),
-              // ListView.builder(
-              //   itemCount: courseData.length,
-              //   itemBuilder: (context, index) {
-              //     return Padding(
-              //       padding: EdgeInsets.all(10),
-              //       child: ListTile(
-              //         title: Text(courseData[index]['name'] ?? "No Name"),
-              //       ),
-              //     );
-              //   },
-              // ),
-              // CarouselSlider(
-              //   items: [
-              //     Container(
-              //       margin: const EdgeInsets.all(6.0),
-              //       decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(8.0),
-              //         image: const DecorationImage(
-              //           image: NetworkImage(
-              //               "https://images.unsplash.com/photo-1617040619263-41c5a9ca7521?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"),
-              //           fit: BoxFit.cover,
-              //         ),
-              //       ),
-              //     ),
-              //     Container(
-              //       margin: const EdgeInsets.all(6.0),
-              //       decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(8.0),
-              //         image: const DecorationImage(
-              //           image: NetworkImage(
-              //               "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"),
-              //           fit: BoxFit.cover,
-              //         ),
-              //       ),
-              //     ),
-              //     Container(
-              //       margin: const EdgeInsets.all(6.0),
-              //       decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(8.0),
-              //         image: const DecorationImage(
-              //           image: NetworkImage(
-              //               "https://images.unsplash.com/photo-1602576666092-bf6447a729fc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80"),
-              //           fit: BoxFit.cover,
-              //         ),
-              //       ),
-              //     ),
-              //     Container(
-              //       margin: const EdgeInsets.all(6.0),
-              //       decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(8.0),
-              //         image: const DecorationImage(
-              //           image: NetworkImage(
-              //               "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHl0aG9uJTIwcHJvZ3JhbW1pbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"),
-              //           fit: BoxFit.cover,
-              //         ),
-              //       ),
-              //     ),
-              //     Container(
-              //       margin: const EdgeInsets.all(6.0),
-              //       decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(8.0),
-              //         image: const DecorationImage(
-              //           image: NetworkImage(
-              //               "https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"),
-              //           fit: BoxFit.cover,
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              //   options: CarouselOptions(
-              //     height: 150.0,
-              //     enlargeCenterPage: true,
-              //     autoPlay: true,
-              //     aspectRatio: 16 / 9,
-              //     autoPlayCurve: Curves.fastOutSlowIn,
-              //     enableInfiniteScroll: true,
-              //     autoPlayAnimationDuration: const Duration(milliseconds: 800),
-              //     viewportFraction: 0.8,
-              //   ),
-              // ),
               const SizedBox(
                 height: 20,
               ),
               SizedBox(
                 width: 351,
                 height: 40,
-                child: Text(
-                  "Kegiatan?",
-                  style: GoogleFonts.workSans(
-                    textStyle: const TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 24,
-                        color: Colors.black),
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Kursusku",
+                      style: GoogleFonts.workSans(
+                        textStyle: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 24,
+                            color: Colors.black),
+                      ),
+                    ),
+                    Text(
+                      "Lihat Semua",
+                      style: GoogleFonts.workSans(
+                        textStyle: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 12,
+                            color: Colors.black),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Column(children: <Widget>[
