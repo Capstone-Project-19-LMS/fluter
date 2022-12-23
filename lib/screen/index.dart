@@ -12,7 +12,7 @@ class Index extends StatefulWidget {
 }
 
 class _Index extends State<Index> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
 
   final List<Widget> _children = [
     const HomeScreen(),

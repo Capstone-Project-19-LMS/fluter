@@ -5,6 +5,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kelompok19lmsproject/api/api.dart';
 import 'package:kelompok19lmsproject/screen/course_screen.dart';
+import 'package:kelompok19lmsproject/screen/index.dart';
+import 'package:kelompok19lmsproject/screen/mycourse_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List courseData = [];
+  List courseHistory = [];
   bool _isLoading = true;
   Future getCourse() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -29,10 +32,22 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Future getHistoryCourse() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var apiResponse = await getCourseHistory(prefs.getString("key")!);
+    if (apiResponse.statusCode == 200) {
+      final data = json.decode(apiResponse.body);
+      setState(() {
+        courseHistory = data['courses'];
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     getCourse();
+    getHistoryCourse();
   }
 
   @override
@@ -129,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               SizedBox(
-                width: double.infinity,
+                width: MediaQuery.of(context).size.width,
                 height: 250,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
@@ -232,60 +247,115 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.black),
                       ),
                     ),
-                    Text(
-                      "Lihat Semua",
-                      style: GoogleFonts.workSans(
-                        textStyle: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12,
-                            color: Colors.black),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Index()));
+                      },
+                      child: Text(
+                        "Lihat Semua",
+                        style: GoogleFonts.workSans(
+                          textStyle: const TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12,
+                              color: Colors.black),
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
-              Column(children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: <Widget>[
-                          Image.network(
-                            'https://img.freepik.com/premium-vector/young-caucasian-man-with-laptop-sitting-big-book-stack-online-education-concept-remote-studying-concept-flat-style-vector-illustration_285336-2679.jpg?w=2000',
-                          ),
-                          Text(
-                            'Belajar Materi??',
-                            style: GoogleFonts.workSans(
-                              textStyle: const TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12,
-                                  color: Colors.black),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 255,
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: courseData.length < 2 ? courseData.length:2,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    child: Card(
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Container(
+                                  width: 100,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              "https://images.unsplash.com/photo-1628277613967-6abca504d0ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"),
+                                          fit: BoxFit.cover),
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10)),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      courseHistory[index]['name'],
+                                      style: GoogleFonts.workSans(
+                                          textStyle: const TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 14)),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Row(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.star_outline,
+                                          color: Colors.yellow,
+                                          size: 20,
+                                        ),
+                                        Text(
+                                          courseHistory[index]['rating']
+                                              .toString(),
+                                          style: GoogleFonts.workSans(
+                                              textStyle: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 14)),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Text(
+                                      "${courseHistory[index]['capacity']} x Pertemuan",
+                                      style: GoogleFonts.workSans(
+                                          textStyle: const TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 14)),
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
-                          )
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                    Expanded(
-                      child: Column(
-                        children: <Widget>[
-                          Image.network(
-                              'https://img.freepik.com/free-vector/internship-concept-illustration_114360-6225.jpg?w=2000'),
-                          Text(
-                            'Latihan Soal',
-                            style: GoogleFonts.workSans(
-                              textStyle: const TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12,
-                                  color: Colors.black),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                )
-              ]),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
