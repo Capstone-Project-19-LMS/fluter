@@ -9,7 +9,7 @@ class SplashScreen extends StatelessWidget {
     Widget splash = SplashScreenView(
       navigateRoute: OnboardingScreen(),
       duration: 500,
-      imageSize: 150,
+      imageSize: 200,
       imageSrc: "assets/image/splash.png",
       // text: "Hello",
       textType: TextType.ColorizeAnimationText,

@@ -291,7 +291,7 @@ class _RegistScreenState extends State<RegistScreen> {
                           ),
                           validator: (passwordValue) {
                             if (passwordValue!.isEmpty) {
-                              return 'Silahkan Masukkan Nama Lengkap Anda';
+                              return 'Silahkan Masukkan Kata Sandi Anda';
                             }
                             password = passwordValue;
                             return null;
@@ -303,26 +303,13 @@ class _RegistScreenState extends State<RegistScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Checkbox(
-                              value: iChecked,
-                              onChanged: (value) {
-                                iChecked = !iChecked;
-                                setState(() {});
-                              },
-                            ),
-                            Expanded(
-                              child: const Text(
-                                "Saya telah membaca dan setuju dengan persyaratan layanan dan polisi privasi kami",
-                                softWrap: true,
-                                maxLines: 2,
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                          ],
-                        ),
+                        // Checkbox(
+                        //   value: iChecked,
+                        //   onChanged: (value) {
+                        //     iChecked = !iChecked;
+                        //     setState(() {});
+                        //   },
+                        // ),
                         SizedBox(
                           height: 10,
                         ),

@@ -42,7 +42,7 @@ class _CourseScreenState extends State<CourseScreen> {
             Navigator.pop(context);
           },
           child: Icon(
-            Icons.arrow_back,
+            Icons.arrow_back_ios,
             color: Colors.black,
           ),
         ),
@@ -109,8 +109,7 @@ class _CourseScreenState extends State<CourseScreen> {
                   shrinkWrap: true,
                   itemCount: courseData.length,
                   itemBuilder: (context, index) => InkWell(
-                    onTap: () {
-                    },
+                    onTap: () {},
                     child: Card(
                       elevation: 10,
                       child: Container(
@@ -179,13 +178,12 @@ class _CourseScreenState extends State<CourseScreen> {
                       ),
                     ),
                   ),
-                  gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 1,
-                          crossAxisSpacing: 0.0,
-                          mainAxisSpacing: 5.0,
-                          mainAxisExtent: 250),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 1,
+                      crossAxisSpacing: 0.0,
+                      mainAxisSpacing: 5.0,
+                      mainAxisExtent: 250),
                 ),
               ),
             ],
