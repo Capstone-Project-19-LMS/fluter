@@ -55,86 +55,101 @@ class _MyCourseState extends State<MyCourse> {
           ],
         ),
       ),
-      body: ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: courseHistory.length,
-        shrinkWrap: true,
-        itemBuilder: (context, index) => Container(
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          child: Card(
-            elevation: 5,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://images.unsplash.com/photo-1628277613967-6abca504d0ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"),
-                                fit: BoxFit.cover),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10)),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 600,
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: courseHistory.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    child: Card(
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                      SizedBox(
-                        width: 20,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Container(
+                                  width: 100,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              "https://images.unsplash.com/photo-1628277613967-6abca504d0ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"),
+                                          fit: BoxFit.cover),
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10)),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      courseHistory[index]['name'],
+                                      style: GoogleFonts.workSans(
+                                          textStyle: const TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 14)),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Row(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.star_outline,
+                                          color: Colors.yellow,
+                                          size: 20,
+                                        ),
+                                        Text(
+                                          courseHistory[index]['rating']
+                                              .toString(),
+                                          style: GoogleFonts.workSans(
+                                              textStyle: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 14)),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Text(
+                                      "${courseHistory[index]['capacity']} x Pertemuan",
+                                      style: GoogleFonts.workSans(
+                                          textStyle: const TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 14)),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            courseHistory[index]['name'],
-                            style: GoogleFonts.workSans(
-                                textStyle: const TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 14)),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Icon(
-                                Icons.star_outline,
-                                color: Colors.yellow,
-                                size: 20,
-                              ),
-                              Text(
-                                courseHistory[index]['rating'].toString(),
-                                style: GoogleFonts.workSans(
-                                    textStyle: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 14)),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            "${courseHistory[index]['capacity']} x Pertemuan",
-                            style: GoogleFonts.workSans(
-                                textStyle: const TextStyle(
-                                    fontWeight: FontWeight.w500, fontSize: 14)),
-                          ),
-                        ],
-                      )
-                    ],
+                    ),
                   ),
-                  Container(),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

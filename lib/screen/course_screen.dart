@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kelompok19lmsproject/api/api.dart';
-import 'package:kelompok19lmsproject/screen/detail_course_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CourseScreen extends StatefulWidget {
@@ -111,10 +110,6 @@ class _CourseScreenState extends State<CourseScreen> {
                   itemCount: courseData.length,
                   itemBuilder: (context, index) => InkWell(
                     onTap: () {
-                      // Navigator.of(context).push(
-                      //   MaterialPageRoute(
-                      //       builder: (context) => DetailCourseScreen(idCourse: courseData[index]['id'],)),
-                      // );
                     },
                     child: Card(
                       elevation: 10,
