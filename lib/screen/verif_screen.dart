@@ -257,25 +257,25 @@ class _VerifScreen extends State<VerifScreen> {
                           labelText: 'Email',
                           hintText: 'Masukan Email',
                         ),
-                          // validator: (emailValue) {
-                          //   if (emailValue!.isEmpty) {
-                          //     return 'Silahkan Masukkan Email Anda';
-                          //   }
-                          //   email = emailValue;
-                          //   return null;
-                          // },
+                        // validator: (emailValue) {
+                        //   if (emailValue!.isEmpty) {
+                        //     return 'Silahkan Masukkan Email Anda';
+                        //   }
+                        //   email = emailValue;
+                        //   return null;
+                        // },
                       ),
                       const SizedBox(
                         height: 20,
                       ),
                       TextFormField(
+                        keyboardType: TextInputType.number,
                         controller: _codeTextController,
                         decoration: InputDecoration(
-                          border: const OutlineInputBorder(
-                              borderSide: BorderSide(width: 2.0)),
-                          labelText: 'Kode Verifikasi',
-                          hintText: 'Masukan Kode',
-                        ),
+                            border: const OutlineInputBorder(
+                                borderSide: BorderSide(width: 2.0)),
+                            labelText: 'Kode Verifikasi',
+                            hintText: 'Masukan Kode'),
                         // validator: (codeValue) {
                         //   if (codeValue!.isEmpty) {
                         //     return 'Silahkan Masukkan Kode Anda';
@@ -296,7 +296,8 @@ class _VerifScreen extends State<VerifScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      processVerifikasiRequest(_emailTextController.text.toString(),
+                      processVerifikasiRequest(
+                          _emailTextController.text.toString(),
                           _codeTextController.text.toString());
                       setState(() {
                         _isLoading = true;

@@ -92,7 +92,7 @@ class _ProfileState extends State<Profile> {
                   maxRadius: 30,
                   minRadius: 30,
                   backgroundColor: Colors.yellow,
-                  backgroundImage: AssetImage("assets/image/profil.png"),
+                  backgroundImage: AssetImage("assets/image/profilkosong.png"),
                 ),
                 Padding(
                   padding:
@@ -102,7 +102,7 @@ class _ProfileState extends State<Profile> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-                      Text("Hai , Maharani",
+                      Text("Hai , User",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20)),
                       Text(
@@ -125,23 +125,23 @@ class _ProfileState extends State<Profile> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: const [
-                  Text(
-                    "Pengaturan Akun",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
+                  // Text(
+                  //   "Pengaturan Akun",
+                  //   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  // ),
                 ],
               ),
             ),
           ),
-          const ProfileWidget(
-            title: 'Ubah Profil',
-          ),
-          const ProfileWidget(
-            title: 'Ubah Bahasa',
-          ),
-          const ProfileWidget(
-            title: 'Unduhan',
-          ),
+          // const ProfileWidget(
+          //   title: 'Ubah Profil',
+          // ),
+          // const ProfileWidget(
+          //   title: 'Ubah Bahasa',
+          // ),
+          // const ProfileWidget(
+          //   title: 'Unduhan',
+          // ),
           Container(
             padding: const EdgeInsets.all(15),
             child: Row(
@@ -149,7 +149,7 @@ class _ProfileState extends State<Profile> {
               children: const [
                 Text(
                   "Lainnya",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ],
             ),

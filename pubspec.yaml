@@ -68,6 +68,7 @@ flutter:
     - assets/image/logo.png
     - assets/image/verif.png
     - assets/image/profil.png
+    - assets/image/profilkosong.png
     
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

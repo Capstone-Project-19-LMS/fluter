@@ -20,29 +20,29 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         globalBackgroundColor: Colors.white,
         pages: [
           PageViewModel(
-              title: "Akses Modul Sepuasnya",
+              title: "Belajar Dari Ahlinya",
               body:
-                  "Instead of having to buy an entire share, invest any amount you want.",
+                  "Pembelajaran dimentori oleh para ahli pada bidangnya masing - masing",
               image: Image.asset(
                 'assets/image/onboarding1.png',
-                width: 200,
+                width: 250,
               ),
               decoration: pageDecoration),
           PageViewModel(
-              title: "Fractional shares",
-              body:
-                  "Instead of having to buy an entire share, invest any amount you want.",
+              title: "Akses Modul Sepuasnya",
+              body: "Modul berlimpah yang bebas diakses dimanapun dan kapanpun",
               image: Image.asset(
                 'assets/image/onboarding2.png',
-                width: 200,
+                width: 250,
               ),
               decoration: pageDecoration),
           PageViewModel(
-            title: "Akses Modul Sepuasnya",
-            body: "Deskripsi lebih kelebihan dari aplikasi ini",
+            title: "Kelas Bersertifikat",
+            body:
+                "Ikuti kelas , kerjakan tugas dan kuis untuk mendapatkan sertifikat",
             image: Image.asset(
               'assets/image/onboarding3.png',
-              width: 200,
+              width: 250,
             ),
             decoration: pageDecoration,
           ),
