@@ -59,7 +59,7 @@ class _CourseScreenState extends State<CourseScreen> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.all(8.0),
+          // padding: const EdgeInsets.all(4.0),
           child: Column(
             children: [
               Center(
@@ -143,34 +143,30 @@ class _CourseScreenState extends State<CourseScreen> {
                                   height: 16,
                                 ),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.star_outlined,
-                                          color: Colors.yellow,
-                                        ),
-                                        Text(
-                                          courseData[index]['rating']
-                                              .toString(),
-                                          style: GoogleFonts.workSans(
-                                              textStyle: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 14)),
-                                        )
-                                      ],
+                                    Icon(
+                                      Icons.star_outlined,
+                                      color: Colors.yellow,
                                     ),
                                     Text(
-                                      "${courseData[index]['capacity']} x Pertemuan",
+                                      courseData[index]['rating'].toString(),
                                       style: GoogleFonts.workSans(
                                           textStyle: TextStyle(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 14)),
                                     )
                                   ],
-                                )
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  "${courseData[index]['capacity']} x Pertemuan",
+                                  style: GoogleFonts.workSans(
+                                      textStyle: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14)),
+                                ),
                               ],
                             ),
                           ],

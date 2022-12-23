@@ -321,7 +321,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Row(
                                       children: <Widget>[
                                         Icon(
-                                          Icons.star_outline,
+                                          Icons.star_outlined,
                                           color: Colors.yellow,
                                           size: 20,
                                         ),
